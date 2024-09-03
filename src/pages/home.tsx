@@ -1,6 +1,6 @@
-import Header from "./header";
-import OptionList from "./optionList";
-import Footer from "./footer";
+import Header from "../components/header";
+import OptionList from "../components/optionList";
+import Footer from "../components/footer";
 
 export default function Home() {
   return (
