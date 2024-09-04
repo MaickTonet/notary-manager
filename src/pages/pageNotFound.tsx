@@ -13,7 +13,7 @@ export default function PageNotFound() {
           Página não encontrada
         </h1>
         <Link to={"/home"}>
-          <button className="flex gap-3 items-center  border border-black/50 p-3 font-bold text-xl w-fit rounded-md shadow hover:scale-105        transition-all hover:shadow-md">
+          <button className="flex gap-3 items-center  border border-black/50 p-3 font-bold text-xl w-fit rounded-md shadow hover:scale-105   transition-all hover:shadow-md">
             <LogIn />
             Voltar para o início
           </button>

@@ -1,14 +1,28 @@
 {
-    "posts": [
-        {
-            "id": 1,
-            "title": "Primeiro Post",
-            "author": "Autor 1"
-        },
-        {
-            "id": 2,
-            "title": "Segundo Post",
-            "author": "Autor 2"
-        }
-    ]
+  "registros": [
+    {
+      "id": "1",
+      "title": "Novo registro",
+      "date": "09/09/2024",
+      "description": "Um novo registro de teste que serve apenas para testar aqui XD"
+    },
+    {
+      "id": "2",
+      "title": "Novo registro de novo",
+      "date": "12/07/2024",
+      "description": "Este ironicamente esta com uma data mais antiga, mas mesmo assim funciona"
+    },
+    {
+      "id": "3",
+      "title": "Mais um novo registro",
+      "date": "30/09/2023",
+      "description": "Ultimo teste, pois estou cansado e quero ir dormir"
+    },
+    {
+      "id": "3",
+      "title": "Mais um novo registro",
+      "data": "30/09/2023",
+      "description": "Ultimo teste, pois estou cansado e quero ir dormir"
+    }
+  ]
 }
