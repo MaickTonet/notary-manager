@@ -1,0 +1,14 @@
+{
+    "posts": [
+        {
+            "id": 1,
+            "title": "Primeiro Post",
+            "author": "Autor 1"
+        },
+        {
+            "id": 2,
+            "title": "Segundo Post",
+            "author": "Autor 2"
+        }
+    ]
+}
