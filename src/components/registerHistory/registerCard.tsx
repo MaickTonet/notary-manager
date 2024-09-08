@@ -9,12 +9,11 @@ export default function RegisterCard(props: RegisterCardProps) {
 
   return (
     <div
-      className=" flex flex-col gap-2 border items-center border-black/20 bg-white p-2 shadow rounded-md hover:scale-105
-         transition-all hover:shadow-md md:max-w-md "
+      className=" flex flex-col gap-2  items-center action-card"
     >
-      <div className="flex gap-2 items-center">
+      <div className="flex gap-2 items-center ">
         <h2 className="font-bold text-lg text-center">{title}</h2>
-        <p>⬤</p>
+        <span className="bg-zinc-600 h-2 w-2 rounded-lg"></span>
         <p className="font-bold">{date}</p>
       </div>
       <p className="line-clamp-2 md:line-clamp-3">{description}</p>

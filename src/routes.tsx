@@ -1,19 +1,23 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import Home from "./pages/home";
-import PageNotFound from "./pages/pageNotFound";
-import RegisterPeoplePage from "./pages/registerPeople";
+import NotFound from "./pages/notFound";
+import RegisterHistory from "./pages/registerHistory";
 
 export const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Navigate to="/home"/>,
+  },
   {
     path: "/home",
     element: <Home />,
   },
   {
-    path: "/registro-de-pessoas",
-    element: <RegisterPeoplePage />,
+    path: "/histórico-de-registros",
+    element: <RegisterHistory />,
   },
   {
     path: "*",
-    element: <PageNotFound />,
-  }
+    element: <NotFound />,
+  },
 ]);
