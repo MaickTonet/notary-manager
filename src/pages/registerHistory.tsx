@@ -15,6 +15,7 @@ interface Register {
 
 export default function RegisterHistory() {
   const [registers, setRegisters] = useState<Register[] | null>([]);
+  const [name, setName] = useState("");
 
   useEffect(() => {
     axios
@@ -22,11 +23,17 @@ export default function RegisterHistory() {
       .then((response) => {
         setRegisters(response.data);
       });
+
+    const username = sessionStorage.getItem("username");
+
+    if (username) {
+      setName(username);
+    }
   }, []);
 
   return (
     <div className="bg-primary min-h-screen">
-      <Header />
+      <Header name={name} />
       <div className="flex flex-col gap-8 py-5 px-[10%] ">
         <h1 className="font-bold text-3xl text-center">Registros criados</h1>
         <div className="flex justify-center"></div>

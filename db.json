@@ -6,8 +6,17 @@
       "email": "maicktonet4@gmail.com",
       "cpf": "11746362979",
       "phone": "49991778587",
-      "password": "snowbelll#",
+      "password": "snowbell#",
       "role": "user"
+    },
+    {
+      "id": "5375",
+      "name": "Service",
+      "email": "service@gmail.com",
+      "cpf": "23549275823",
+      "phone": "528395729375",
+      "password": "service@",
+      "role": "admin"
     }
   ],
   "registros": [

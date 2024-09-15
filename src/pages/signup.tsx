@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import Modal from "react-modal";
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 interface ISignUp {
@@ -17,16 +16,11 @@ Modal.setAppElement("#root");
 
 export default function SignUp() {
   const { register, handleSubmit } = useForm<ISignUp>();
-  const navigate = useNavigate();
-  const [modal, setModal] = useState(false);
-
-  const toggleModal = () => {
-    setModal(!modal);
-  };
+  const [error, setError] = useState(false);
+  const [userCreate, setUserCreate] = useState(false);
 
   async function signUp(data: ISignUp) {
     const { name, email, cpf, phone, password } = data;
-    console.log(data);
 
     try {
       await axios.post("http://localhost:3000/usuarios", {
@@ -37,11 +31,10 @@ export default function SignUp() {
         password,
         role: "user",
       });
-
-      navigate("/home");
+      setUserCreate(true);
     } catch (error) {
       console.error(error);
-      toggleModal();
+      setError(true);
     }
   }
 
@@ -109,6 +102,19 @@ export default function SignUp() {
               required={true}
             />
           </label>
+          {error && (
+            <span className="text-center text-lg bg-red-500 p-1 rounded-md shadow">
+              Erro ao cadastrar usuário
+            </span>
+          )}
+          {userCreate && (
+            <Link
+              to={"/login"}
+              className="text-center text-lg bg-emerald-500 p-1 rounded-md shadow"
+            >
+              Usuário criado com sucesso! clique aqui para ir para o logar
+            </Link>
+          )}
           <button
             type="submit"
             className="font-bold text-xl p-1 rounded-lg ease-in duration-100 bg-blue-700 shadow hover:bg-blue-600"
@@ -122,35 +128,6 @@ export default function SignUp() {
           </Link>
         </form>
       </div>
-      <Modal
-        isOpen={modal}
-        onRequestClose={() => toggleModal()}
-        closeTimeoutMS={300}
-        className={{
-          base: "fixed inset-0 flex items-center justify-center z-50 transform transition-transform duration-300 ease-out",
-          afterOpen: "scale-100 opacity-100",
-          beforeClose: "scale-95 opacity-0",
-        }}
-        overlayClassName={{
-          base: "fixed inset-0 bg-gray-800 bg-opacity-75 transition-opacity duration-300",
-          afterOpen: "opacity-100",
-          beforeClose: "opacity-0",
-        }}
-      >
-        <div className="flex flex-col gap-4 items-center bg-white w-[80%] md:w-1/3 p-8 rounded-lg shadow-lg mx-auto mt-20 outline-none">
-          <img
-            src="src/assets/error.svg"
-            alt="Imagem de erro de cadastro"
-            className=""
-          />
-          <h2 className="text-center text-xl">
-            Parece que algo deu errado, tente novamente mais tarde
-          </h2>
-          <button onClick={toggleModal} className="action-button-secondary">
-            Fechar
-          </button>
-        </div>
-      </Modal>
     </div>
   );
 }

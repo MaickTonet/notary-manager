@@ -10,38 +10,51 @@ interface Login {
   password: string;
 }
 
+interface IUser {
+  id: string;
+  name: string;
+  email: string;
+  cpf: string;
+  phone: string;
+  password: string;
+  role: string;
+}
+
 Modal.setAppElement("#root");
 
 export default function Login() {
   const { register, handleSubmit } = useForm<Login>();
   const navigate = useNavigate();
-  const [modal, setModal] = useState(false);
-
-  const toggleModal = () => {
-    setModal(!modal);
-  };
+  const [userIncorrect, setUserIncorrect] = useState(false);
+  const [error, setError] = useState(false);
 
   async function tryLogin(data: Login) {
     const { email, password } = data;
-    console.log(data);
 
     try {
-      const response = await axios.get("http://localhost:3000/usuarios", {
-        params: {
-          email: email,
-          password: password,
-        },
-      });
+      await axios
+        .get<IUser[]>("http://localhost:3000/usuarios", {
+          params: {
+            email: email,
+            password: password,
+          },
+        })
+        .then((response) => {
+          const user = response.data.find(
+            (user) => user.email === email && user.password === password
+          );
 
-      const user = response.data;
-      console.log(user);
-
-      if (user.length) {
-        navigate("/home");
-      }
+          if (user) {
+            navigate("/home");
+            sessionStorage.setItem("username", user.name);
+            sessionStorage.setItem("role", user.role);
+          } else {
+            setUserIncorrect(true);
+          }
+        });
     } catch (error) {
       console.error(error);
-      toggleModal();
+      setError(true);
     }
   }
 
@@ -79,6 +92,16 @@ export default function Login() {
               required={true}
             />
           </label>
+          {userIncorrect && (
+            <span className="text-center text-lg bg-red-500 p-1 rounded-md shadow">
+              Usuário ou senha incorretos
+            </span>
+          )}
+          {error && (
+            <span className="text-center text-lg bg-red-500 p-1 rounded-md shadow">
+              Erro ao entrar
+            </span>
+          )}
           <button
             type="submit"
             className="font-bold text-xl p-1 rounded-lg ease-in duration-100 bg-blue-700 shadow hover:bg-blue-600"
@@ -92,35 +115,6 @@ export default function Login() {
           </Link>
         </form>
       </div>
-      <Modal
-        isOpen={modal}
-        onRequestClose={() => toggleModal()}
-        closeTimeoutMS={300}
-        className={{
-          base: "fixed inset-0 flex items-center justify-center z-50 transform transition-transform duration-300 ease-out",
-          afterOpen: "scale-100 opacity-100",
-          beforeClose: "scale-95 opacity-0",
-        }}
-        overlayClassName={{
-          base: "fixed inset-0 bg-gray-800 bg-opacity-75 transition-opacity duration-300",
-          afterOpen: "opacity-100",
-          beforeClose: "opacity-0",
-        }}
-      >
-        <div className="flex flex-col gap-4 items-center bg-white w-[80%] md:w-1/3 p-8 rounded-lg shadow-lg mx-auto mt-20 outline-none">
-          <img
-            src="src/assets/error.svg"
-            alt="Imagem de erro de cadastro"
-            className=""
-          />
-          <h2 className="text-center text-xl">
-            Parece que algo deu errado, tente novamente mais tarde
-          </h2>
-          <button onClick={toggleModal} className="action-button-secondary">
-            Fechar
-          </button>
-        </div>
-      </Modal>
     </div>
   );
 }
