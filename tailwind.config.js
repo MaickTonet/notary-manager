@@ -23,6 +23,9 @@ export default {
         '.action-button-secondary': {
           '@apply border border-black/50 p-3 font-bold text-xl w-fit rounded-md shadow hover:text-black hover:border-black   transition-all hover:shadow-md ease-in-out delay-100  text-zinc-600 outline-none': {},
         },
+        '.sucess-button': {
+          '@apply bg-blue-600 font-bold text-white text-lg p-1 rounded-md outline-none shadow hover:shadow-md hover:bg-blue-700 transition-all md:w-[60%] w-full': {},
+        },
         '.cancel-button': {
           '@apply bg-red-600 font-bold text-white text-lg p-1 rounded-md outline-none shadow hover:shadow-md hover:bg-red-700 transition-all md:w-[60%] w-full': {},
         },
@@ -33,7 +36,7 @@ export default {
           '@apply p-2 border border-black/30 rounded outline-none text-lg': {},
         },
         '.modal-style': {
-          '@apply flex flex-col gap-4 bg-white p-6 rounded w-[80%] md:w-[60%] max-h-[80%] overflow-y-auto shadow-lg md:px-12': {},
+          '@apply flex flex-col gap-4 bg-white p-6 rounded w-[80%] md:w-[50%] max-h-[80%] overflow-y-auto shadow-lg md:px-12': {},
         },
       })
     },

@@ -1,13 +1,16 @@
 import Header from "../components/header";
-import RegisterCard from "../components/registerHistory/registerCard";
+import RegisterCard, {
+  StatusType,
+} from "../components/registerHistory/registerCard";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
 interface Register {
-  id: number;
+  id: string;
   title: string;
   date: string;
-  description: string;
+  status: StatusType;
+  remetente: string;
 }
 
 export default function RegisterHistory() {
@@ -18,7 +21,6 @@ export default function RegisterHistory() {
       .get<Register[]>("http://localhost:3000/registros")
       .then((response) => {
         setRegisters(response.data);
-        console.log(response.data);
       });
   }, []);
 
@@ -36,7 +38,8 @@ export default function RegisterHistory() {
                     key={register.id}
                     title={register.title}
                     date={register.date}
-                    description={register.description}
+                    status={register.status}
+                    remetente={register.remetente}
                   />
                 );
               })

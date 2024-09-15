@@ -1,52 +1,31 @@
 {
+  "usuarios": [
+    {
+      "id": "2764",
+      "name": "Maick Tonet",
+      "email": "maicktonet4@gmail.com",
+      "cpf": "11746362979",
+      "phone": "49991778587",
+      "password": "snowbelll#",
+      "role": "user"
+    }
+  ],
   "registros": [
     {
-      "id": 1,
-      "title": "Novo registro",
-      "date": "09/09/2024",
-      "description": "Um novo registro de teste que serve apenas para testar aqui XD"
+      "id": "e799",
+      "title": "Registro Civil",
+      "remetente": "Maick Tonet",
+      "date": "2024-09-18T20:44",
+      "status": "Aguardando",
+      "description": "Um novo registro civil em aberto"
     },
     {
-      "id": 2,
-      "title": "Novo registro de novo",
-      "date": "12/07/2024",
-      "description": "Este ironicamente esta com uma data mais antiga, mas mesmo assim funciona"
-    },
-    {
-      "id": 3,
-      "title": "Mais um novo registro",
-      "date": "30/09/2023",
-      "description": "Ultimo teste, pois estou cansado e quero ir dormir"
-    },
-    {
-      "id": 4,
-      "title": "Novo registro",
-      "date": "09/09/2024",
-      "description": "Um novo registro de teste que serve apenas para testar aqui XD"
-    },
-    {
-      "id": 5,
-      "title": "Novo registro",
-      "date": "09/09/2024",
-      "description": "Um novo registro de teste que serve apenas para testar aqui XD"
-    },
-    {
-      "id": 6,
-      "title": "Novo registro",
-      "date": "09/09/2024",
-      "description": "Um novo registro de teste que serve apenas para testar aqui XD"
-    },
-    {
-      "id": 7,
-      "title": "Novo registro",
-      "date": "09/09/2024",
-      "description": "Um novo registro de teste que serve apenas para testar aqui XD"
-    },
-    {
-      "id": 8,
-      "title": "Novo registro",
-      "date": "09/09/2024",
-      "description": "Um novo registro de teste que serve apenas para testar aqui XD"
+      "id": "7456",
+      "title": "Registro Civil",
+      "remetente": "Maick Tonet",
+      "date": "2024-10-03T20:45",
+      "status": "Aguardando",
+      "description": "Um novo registro civil em aberto"
     }
   ]
 }

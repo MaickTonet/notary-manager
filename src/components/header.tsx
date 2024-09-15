@@ -18,7 +18,7 @@ export default function Header() {
         />
       </Link>
       <div className="flex gap-3 items-center font-medium">
-        <p className="hidden md:flex text-xl">Olá, Maick Tonet</p>
+        <p className="hidden md:flex text-xl">Bem vindo!</p>
         <CircleUserRound color="#000000" size={28} />
       </div>
     </div>

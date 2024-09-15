@@ -1,14 +1,42 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
+import { useForm } from "react-hook-form";
+import axios from "axios";
 
 Modal.setAppElement("#root");
 
+interface Register {
+  name: string;
+  date: string;
+}
+
 export default function CivilRegisterForm() {
   const [isOpen, setIsOpen] = useState(false);
+  const { register, handleSubmit } = useForm<Register>();
 
   const toggleModal = () => {
     setIsOpen(!isOpen);
   };
+
+  async function createRegister(data: Register) {
+    const { name, date } = data;
+
+    console.log(data);
+
+    try {
+      await axios.post("http://localhost:3000/registros", {
+        title: "Registro Civil",
+        remetente: name,
+        date: date,
+        status: "Aguardando",
+        description: "Um novo registro civil em aberto",
+      });
+      toggleModal();
+    } catch (error) {
+      console.error("Erro ao enviar dados:", error);
+    }
+  }
+
   return (
     <React.Fragment>
       <button onClick={toggleModal} className="outline-none">
@@ -19,12 +47,12 @@ export default function CivilRegisterForm() {
             className="w-1/3 md:w-1/2"
             draggable={false}
           />
-          <h2 className="font-medium text-xl">Histórico de Registros</h2>
+          <h2 className="font-medium text-xl">Registro Civil</h2>
         </div>
       </button>
       <Modal
         isOpen={isOpen}
-        onRequestClose={toggleModal}
+        onRequestClose={() => toggleModal()}
         closeTimeoutMS={300}
         className={{
           base: "fixed inset-0 flex items-center justify-center z-50 transform transition-transform duration-300 ease-out",
@@ -38,56 +66,47 @@ export default function CivilRegisterForm() {
         }}
       >
         <div className="modal-style">
-          <h1 className="font-bold text-2xl text-center">Novo registro</h1>
+          <h1 className="font-bold text-2xl text-center">
+            Novo registro civil
+          </h1>
           <hr />
-          <form className="flex flex-col gap-4 mb-5 ">
-            <div className="flex flex-col gap-1">
-              <label className="text-lg">Nome</label>
+          <form
+            onSubmit={handleSubmit(createRegister)}
+            className="flex flex-col gap-4 mb-5"
+          >
+            <label className="flex flex-col gap-1 text-lg">
+              Nome
               <input
                 type="text"
                 placeholder="Digite seu nome"
                 className="form-input"
+                required={true}
+                {...register("name")}
               />
-            </div>
-            <div className="flex flex-col gap-1">
-              <label className="text-lg">CPF</label>
+            </label>
+            <hr />
+            <label className="flex flex-col gap-1 text-lg">
+              Horário Sugerido
               <input
-                type="number"
-                placeholder="Digite seu nome"
+                type="datetime-local"
                 className="form-input"
+                required={true}
+                {...register("date")}
               />
-            </div>
-            <div className="flex flex-col gap-1">
-              <label className="text-lg">RG</label>
-              <input
-                type="number"
-                placeholder="Digite seu nome"
-                className="form-input"
-              />
+            </label>
+            <div className="flex flex-col items-center gap-6">
+              <button type="submit" className="sucess-button">
+                Solicitar agendamento
+              </button>
+              <button
+                type="button"
+                onClick={toggleModal}
+                className="cancel-button "
+              >
+                Cancelar
+              </button>
             </div>
           </form>
-          <h2 className="font-bold text-xl text-center">
-            Documentos nescessários
-          </h2>
-          <p className="text-zinc-600 text-center">
-            Para fazer o registro, os pais devem levar, os documentos pessoais
-            (RG, CPF, certidão de nascimento ou casamento), bem como a
-            “declaração de nascido vivo”, emitida pelo hospital ou maternidade e
-            entregue aos pais do bebê após o seu nascimento.
-          </p>
-          <hr />
-          <h2 className="font-bold text-xl text-center">
-            Horários disponíveis
-          </h2>
-          <p className="text-zinc-600 text-center">
-            Escolha um dos horários disponíveis para o atendimento
-          </p>
-          <hr />
-          <div className="flex justify-center ">
-            <button onClick={toggleModal} className="cancel-button ">
-              Cancelar
-            </button>
-          </div>
         </div>
       </Modal>
     </React.Fragment>
