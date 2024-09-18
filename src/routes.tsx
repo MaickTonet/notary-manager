@@ -4,6 +4,7 @@ import NotFound from "./pages/notFound";
 import RegisterHistory from "./pages/registerHistory";
 import Login from "./pages/login";
 import SignUp from "./pages/signup";
+import RegisterPage from "./pages/register";
 
 export const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ export const router = createBrowserRouter([
   {
     path: "/histórico-de-registros",
     element: <RegisterHistory />,
+  },
+  {
+    path: "/registro/:id",
+    element: <RegisterPage />,
   },
   {
     path: "*",

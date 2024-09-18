@@ -6,11 +6,15 @@ export type StatusType = "Novo" | "Aguardando" | "Concluído" | "Cancelado";
 interface RegisterCardProps {
   title: string;
   date: string;
-  status: StatusType; // Restringimos o tipo de status
+  status: StatusType;
   remetente: string;
 }
 
-const formatDateTime = (dateTimeString: string) => {
+export const formatDateTime = (dateTimeString: string | undefined) => {
+  if (dateTimeString === undefined) {
+    return null;
+  }
+
   const date = new Date(dateTimeString);
 
   const horas = date.getHours().toString().padStart(2, "0");
